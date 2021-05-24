@@ -29,6 +29,13 @@ module Form = {
       ~option=Hooks.ArrayField.option(~control, ~name="hobbies", ()),
     )
 
+    React.useEffect2(() => {
+      if isShow === true {
+        reset()
+      }
+
+      None
+    }, (isShow, reset))
     let onSubmit = (data, _event) =>
       switch data->ReCode.Decode.decodeJson(Values.decoder) {
       | Ok(value) => Js.log2("ok", value)

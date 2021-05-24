@@ -35,7 +35,7 @@ module Form = {
     setValue: (. string, string) => unit,
     clearErrors: (. string) => unit,
     setError: (. string, Error.t) => unit,
-    reset: (~defaultValues: Js.Dict.t<Value.t>=?, unit) => unit,
+    reset: unit => unit,
     getValues: (~fieldName: string) => string,
   }
 
@@ -71,4 +71,19 @@ module ArrayField = {
   )
   @module("react-hook-form")
   external use: (~option: option) => t<'data> = "useFieldArray"
+}
+
+module WatchValues = {
+  @ocaml.doc("Option builder for the [useWatch](https://react-hook-form.com/api/usewatch) hook.")
+  @deriving({abstract: light})
+  type option = {
+    name: string,
+    control: Control.t,
+    @optional
+    defaultValue: Value.t,
+  }
+
+  @ocaml.doc("Bindings for the [useWatch](https://react-hook-form.com/api/usewatch) hook.")
+  @module("react-hook-form")
+  external use: (~option: option) => 'a = "useWatch"
 }
